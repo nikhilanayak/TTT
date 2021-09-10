@@ -56,12 +56,14 @@ bool game_over(game* game, int* x_points, int* o_points){ // returns true, adds 
 		if(game->game_board[first % 3][first / 3] == game->game_board[second % 3][second/3] && game->game_board[second % 3][second/3]== game->game_board[third % 3][third/3]){
 			if(game->game_board[first % 3][first / 3] != EMPTY){
 				const int winner = game->game_board[first % 3][first / 3];
-				std::cout << first << ", " << second << ", " << third << "\n";
+//				std::cout << first << ", " << second << ", " << third << "\n";
 				if(winner == O){
+					std::cout << "\n\n\n";
 					std::cout << "O Wins!\n";
 					(*o_points)++;
 				}
 				else{
+					std::cout << "\n\n\n";
 					std::cout << "X Wins!\n";
 					(*x_points)++;
 				}
@@ -140,17 +142,17 @@ int main(){
 	int o_points = 0;
 	while(true){
 		game g;
+		g.current_player = X;
 		for(int i = 0; i < 3; i++)
 			for(int j = 0; j < 3; j++)
 				g.game_board[i][j] = EMPTY; // initializes the board (could also just memset EMPTY)
 
 
+		print_board(&g);
 		while(true){
-			print_board(&g);
 			take_turn(&g);
+			print_board(&g);
 			if(game_over(&g, &x_points, &o_points)){
-				print_board(&g);
-				std::cout << "\n\n\n";
 				std::cout << "Score -> X: " << x_points << ", Y: " << o_points << "\n";
 				break;
 			}
