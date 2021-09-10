@@ -87,7 +87,9 @@ void print_cell(char cell){ // prints the value of a cell in the game board
 	}
 }
 void print_board(game* game){ // formats and prints the board to the screen
+	std::cout << "  1 2 3\n";
 	for(int y = 0; y < B_SIZE; y++){
+		std::cout << (char)('a' + y) << " ";
 		for(int x = 0; x < B_SIZE; x++){
 			print_cell(game->game_board[x][y]);
 			std::cout << " ";
@@ -104,23 +106,19 @@ void take_turn(game* game){ // gets input from the user, validates, and changes 
 	else{
 		std::cout << "O's turn, ";
 	}
-	std::cout << "Select a number (0-8): ";
-
-	if(!(std::cin >> pos)){ // if invalid, clear cin and retry
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return take_turn(game);
-	}
+	std::cout << "Select a position(like 'a1')";
 	
-	if(pos < 0 || pos > 8){ // if invalid, clear cin and retry
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	char input[2048];
+	std::cin.getline(input, 2048, '\n');
+	if(input[0] < 'a' || input[0] > 'c'){
 		return take_turn(game);
 	}
 
-
-	int x = pos % 3;
-	int y = pos / 3;
+	if(input[1] < '1' || input[1] > '3'){
+		return take_turn(game);
+	}
+	int y = input[0] - 'a';
+	int x = input[1] - '1';
 	// std::cout << x << ", " << y << "\n";
 
 
