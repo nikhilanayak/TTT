@@ -1,3 +1,9 @@
+/*
+Written By: Nikhil Nayak
+Date: 10/20/21
+Description: A two player tic-tac-toe game written in c++ created for the terminal. Allows multiple games and keeps track of game score
+*/
+
 #include <iostream>
 #include <limits>
 
